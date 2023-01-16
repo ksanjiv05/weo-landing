@@ -1,18 +1,38 @@
 import Image from "next/image";
 import * as React from "react";
 import logocoll from "../../public/logocoll.png";
+import Telegram from "../../public/Telegram.png";
+import Discord from "../../public/Discord.png";
+import Signal from "../../public/Signal.png";
+
+import YouTube from "../../public/YouTube.png";
+import Twitter from "../../public/Twitter.png";
+import LinkedIn from "../../public/LinkedIn.png";
+// import Signal from "../../public/Signal.png";
+
+
 import { Direction } from "../components/Logo";
 import LogoSlice from "../components/LogoSlice";
 import { useHeight } from "../hook";
 import { COLORS } from "../utils/constants";
 
-export interface IHomeInfoProps {}
+export interface IHomeInfoProps { }
 
 export default function HomeInfo(props: IHomeInfoProps) {
-  const height = useHeight();
+  const [windowSize, setWindowSize] = React.useState({ width: 0, height: 0 })
+
   const onMouseEnter = (direction: Direction) => {
     console.log("onMouseEnter info");
   };
+  React.useEffect(() => {
+
+    const handleResize = () => { console.log("use effec", window.Event.name); return setWindowSize({ width: window.innerWidth, height: window.innerHeight }) };
+    window.addEventListener("load", handleResize);
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+
+  }, [])
   return (
     <div className="container mx-auto overflow-hidden bg-black">
       <div className="flex h-screen items-center  justify-center">
@@ -52,7 +72,7 @@ export default function HomeInfo(props: IHomeInfoProps) {
         </div>
         <div
           className=" bg-black absolute bottom-0 w-screen"
-          style={{ height: height / 4 }}
+          style={{ height: windowSize.height / 4 }}
         >
           <div className=" flex items-center justify-center">
             <h1 className=" font-bold" style={{ color: "#fff", fontSize: 35 }}>
@@ -60,16 +80,16 @@ export default function HomeInfo(props: IHomeInfoProps) {
             </h1>
             <h1
               className=" font-bold"
-              style={{ color: "#ffffff4a", fontSize: 35,marginLeft:10 }}
+              style={{ color: "#ffffff4a", fontSize: 35, marginLeft: 10 }}
             >
               Marketplace,
             </h1>
-            <h1 className=" font-bold" style={{ color: "#fff", fontSize: 35,marginLeft:10 }}>
+            <h1 className=" font-bold" style={{ color: "#fff", fontSize: 35, marginLeft: 10 }}>
               Our
             </h1>
             <h1
               className=" font-bold"
-              style={{ color: "#ffffff4a", fontSize: 35,marginLeft:10 }}
+              style={{ color: "#ffffff4a", fontSize: 35, marginLeft: 10 }}
             >
               Way
             </h1>
@@ -89,9 +109,29 @@ export default function HomeInfo(props: IHomeInfoProps) {
         <div className=" w-16 h-16 absolute bg-white bottom-0"> icons</div>
 
       </div>
-      <div className=" w-72 h-16 absolute bg-white bottom-0 left-0"> icons hear</div>
-        
-        <div className=" w-72 h-16 absolute bg-white bottom-0 right-0"> icons hear</div>
+      <div className="w-52 h-16 absolute flex bottom-0 left-0 items-center ">
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={Telegram} className="h-8 w-8" alt="logo" />
+        </div>
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={Discord} className="h-8 w-8" alt="logo" />
+        </div>
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={Signal} className="h-8 w-8" alt="logo" />
+        </div>
+      </div>
+
+      <div className="w-52 h-16 absolute flex bottom-0 right-0 items-center ">
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={YouTube} className="h-8 w-8" alt="logo" />
+        </div>
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={Twitter} className="h-8 w-8" alt="logo" />
+        </div>
+        <div className=" flex-1 flex bg-black items-end justify-center">
+          <Image src={LinkedIn} className="h-8 w-8" alt="logo" />
+        </div>
+      </div>
     </div>
   );
 }

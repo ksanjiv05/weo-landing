@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 export enum Direction {
   TOP,
   BOTTOM,
@@ -7,14 +7,14 @@ export enum Direction {
   RIGHT,
 }
 type AnimateObj = {
-  x: number,
-  y: number
-}
+  x: number;
+  y: number;
+};
 interface ILogoSliceProps {
   backgroundColor: string;
   direction: Direction;
-  animateObj?: AnimateObj,
-  onMouseEnter: (direction: Direction) => void
+  animateObj?: AnimateObj;
+  onMouseEnter: (direction: Direction) => void;
 }
 
 function throttle(cb, delay) {
@@ -22,7 +22,7 @@ function throttle(cb, delay) {
 
   return (...args) => {
     if (wait) {
-        return;
+      return;
     }
 
     cb(...args);
@@ -30,14 +30,14 @@ function throttle(cb, delay) {
     setTimeout(() => {
       wait = false;
     }, delay);
-  }
+  };
 }
 
 const LogoSlice: React.FunctionComponent<ILogoSliceProps> = ({
   backgroundColor,
   direction,
-  animateObj = { x: 0 },
-  onMouseEnter
+  animateObj = { x: 0,y:0 },
+  onMouseEnter,
 }) => {
   const directionObj = () => {
     switch (direction) {
@@ -79,6 +79,15 @@ const LogoSlice: React.FunctionComponent<ILogoSliceProps> = ({
         };
     }
   };
+  const [hide,setHide] = React.useState({x:0,y:0})
+
+  React.useEffect(()=>{
+    setHide(animateObj)
+    setTimeout(()=>{
+      setHide({x:0,y:0})
+      // console.log("setHide")
+    },1200)
+  },[animateObj])
   return (
     <motion.div
       style={{
@@ -88,13 +97,23 @@ const LogoSlice: React.FunctionComponent<ILogoSliceProps> = ({
         // ...directionObj()?.bigCon,
       }}
       className="absolute rounded-full flex items-center  justify-center transition ease-in-out duration-150 "
-      animate={animateObj}
+      animate={hide}
       transition={{ delay: 1 }}
+      onMouseOver={(e) => {
+        console.log("mouseOver",e.target)
+        e.preventDefault();
+        e.stopPropagation();
+        onMouseEnter(direction);
+      }}
     >
-      <div className="w-36 h-36 rounded absolute cursor-pointer bg-transparent" onMouseOver={(e) => {
-       e.preventDefault()
-       onMouseEnter(direction)
-      }} ></div>
+      {/* <div
+        className="w-36 h-36 rounded absolute cursor-pointer bg-transparent"
+        onMouseOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onMouseEnter(direction);
+        }}
+      ></div> */}
       <div
         className="absolute rounded-full"
         style={{

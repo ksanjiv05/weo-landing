@@ -14,14 +14,16 @@ interface ILogoProps {
     backgroundColor: string;
     direction: Direction;
     animateObj?: AnimateObj
-    interpolate?:number
+    interpolate?:number,
+    onMouseEnter?: React.MouseEventHandler<HTMLDivElement> | undefined
 }
 
 const Logo: React.FunctionComponent<ILogoProps> = ({
     backgroundColor,
     direction,
     animateObj = { x: 0 },
-    interpolate
+    interpolate,
+    onMouseEnter,
 }) => {
     // console.log("i",interpolate)
     const directionObj = () => {
@@ -76,6 +78,7 @@ const Logo: React.FunctionComponent<ILogoProps> = ({
             className="absolute rounded-full flex items-center  justify-center transition ease-in-out duration-150 "
             animate={animateObj}
             transition={{ delay: 1 }}
+            onMouseEnter={onMouseEnter}
         >
             <div
                 className="absolute rounded-full"
