@@ -12,7 +12,7 @@ import  {
   EarnMoreTextElements,
 } from "../../components/EarnMore";
 import  { KeepMoreOLogo, KeepMoreTextElements } from "../../components/KeepMore";
-import GetMore, { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
+import  { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
 import { MakeMoreOLogo, MakeMoreTextElements } from "../MakeMore";
 import BeMore from "../../components/BeMore";
 
@@ -22,19 +22,7 @@ const LOGO = 2 * 75;
 const LIMIT = 150;
 const LIMIT_Y = 100;
 
-function throttle(cb: Function, delay = 250) {
-  let shouldWait = false;
 
-  return () => {
-    if (shouldWait) return;
-
-    cb();
-    shouldWait = true;
-    setTimeout(() => {
-      shouldWait = false;
-    }, delay);
-  };
-}
 
 let set = new Set();
 export function HomeIndex(props: IHomeIndexProps) {
