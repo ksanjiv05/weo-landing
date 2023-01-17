@@ -24,7 +24,7 @@ const LIMIT_Y = 100;
 
 
 let set = new Set();
-export function HomeIndex(props: IHomeIndexProps) {
+export default function HomeIndex(props: IHomeIndexProps) {
   const router = useRouter();
   const [initialCord, setInitialCord] = React.useState({ x: 0, y: 0 });
   const [windowSize, setWindowSize] = React.useState({ width: 0, height: 0 });

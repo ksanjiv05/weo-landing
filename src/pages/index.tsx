@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import { HomeIndex } from './home/Index'
+import HomeIndex from './home/Index'
 
 const inter = Inter({ subsets: ['latin'] })
 
