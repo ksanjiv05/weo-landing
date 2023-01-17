@@ -2,18 +2,17 @@ import Image from "next/image";
 import * as React from "react";
 import logocoll from "../../../public/logocoll.png";
 import Draggable from "react-draggable";
-import { COLORS, TOGGAL_WIDTH, WIDTH } from "../../utils/constants";
+import { COLORS} from "../../utils/constants";
 import LogoSlice, { Direction } from "../../components/LogoSlice";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import HomeInfo from "../../components/HomeInfo";
 import  {
   EarnMoreOLogo,
   EarnMoreTextElements,
 } from "../../components/EarnMore";
 import  { KeepMoreOLogo, KeepMoreTextElements } from "../../components/KeepMore";
 import  { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
-import { MakeMoreOLogo, MakeMoreTextElements } from "../MakeMore";
+import { MakeMoreOLogo, MakeMoreTextElements } from "../../components/MakeMore";
 import BeMore from "../../components/BeMore";
 
 export interface IHomeIndexProps { }
@@ -446,7 +445,7 @@ export function HomeIndex(props: IHomeIndexProps) {
           </>
         )}
       </div>
-      {active&&<BeMore />}
+      {active&&set.size>=4&& <BeMore />}
     </div>
   );
 }

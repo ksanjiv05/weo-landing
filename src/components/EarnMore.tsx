@@ -1,8 +1,7 @@
 import * as React from "react";
 import { COLORS } from "../utils/constants";
 import { motion } from "framer-motion";
-import { useWidth } from "../hook";
-import { useRouter } from "next/router";
+
 
 // const OLogo = () => {
 //   const router = useRouter()

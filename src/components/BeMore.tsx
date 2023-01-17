@@ -7,7 +7,7 @@ import Signal from "../../public/Signal.png";
 
 import YouTube from "../../public/YouTube.png";
 import Twitter from "../../public/Twitter.png";
-import LinkedIn from "../../public/LinkedIn.png";
+import qo from "../../public/qo.png";
 // import Signal from "../../public/Signal.png";
 import { motion, useScroll } from "framer-motion";
 
@@ -168,9 +168,9 @@ export default function BeMore(props: IBeMoreProps) {
             },
           }}
           initial="hidden"
-          className=" w-16 h-16  bg-white "
+          className=" w-16 h-16 "
         >
-          icons
+          <Image src={qo} className="h-16 w-12" alt="logo" />
         </motion.div>
       </footer>
     </motion.div>
