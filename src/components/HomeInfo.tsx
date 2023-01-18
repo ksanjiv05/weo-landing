@@ -120,6 +120,15 @@ export default function HomeInfo({ id }: IHomeInfoProps) {
               style={{ backgroundColor: "#525252" }}
             >
               <Image src={logocoll} className="h-28 w-28" alt="logo" />
+              <div
+              className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+              
+            >
+              <div
+                className="h-8 w-8 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+                style={{ backgroundColor: "#525252" }}
+              ></div>
+            </div>
             </div>
           </motion.div>
         </div>
