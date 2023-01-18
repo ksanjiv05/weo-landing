@@ -69,7 +69,7 @@ export default function HomeInfo({ id }: IHomeInfoProps) {
         initial="hidden"
         onMouseEnter={() => setInView(true)}
         onMouseLeave={() => setInView(false)}
-        className="h-screen flex flex-col bg-black justify-between"
+        className="h-screen w-screen flex flex-col bg-black justify-between"
       >
         <div className="flex flex-1 items-end pb-8  justify-center">
           <motion.div

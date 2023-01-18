@@ -317,7 +317,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
         </motion.div>
       )}
       <section
-        className="flex h-screen items-center  justify-center opacity-1"
+        className="flex h-screen w-screen items-center  justify-center opacity-1"
       >
         <Draggable
           disabled={!active}
