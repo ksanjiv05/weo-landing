@@ -15,6 +15,7 @@ interface ILogoSliceProps {
   direction: Direction;
   animateObj?: AnimateObj;
   onMouseEnter: (direction: Direction) => void;
+  isShow?:Boolean
 }
 
 
@@ -24,6 +25,7 @@ const LogoSlice: React.FunctionComponent<ILogoSliceProps> = ({
   direction,
   animateObj = { x: 0,y:0 },
   onMouseEnter,
+  isShow = false
 }) => {
   const directionObj = () => {
     switch (direction) {
@@ -69,10 +71,12 @@ const LogoSlice: React.FunctionComponent<ILogoSliceProps> = ({
 
   React.useEffect(()=>{
     setHide(animateObj)
+    if(!isShow){
     setTimeout(()=>{
       setHide({x:0,y:0})
       // console.log("setHide")
     },1200)
+  }
   },[animateObj])
   return (
     <motion.div

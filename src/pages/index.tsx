@@ -2,10 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import HomeIndex from './home/Index'
-
+import { TourProvider,useTour } from '@reactour/tour'
+import { steps } from '../tour/steps'
+import React from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  // React.useEffect(()=>{
+  //   setIsOpen(true)
+  // },[])
   return (
     <>
       <Head>
@@ -15,7 +20,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto overflow-hidden overflow-x-hidden overflow-y-hidden">
-        <HomeIndex />
+        
+        <TourProvider steps={steps} 
+         styles={{
+          popover: (base) => ({
+            ...base,
+            '--reactour-accent': '#ef5a3d',
+            borderRadius: 30,
+          }),
+          maskArea: (base) => ({ ...base, rx: 300 }),
+          // maskWrapper: (base) => ({ ...base, color: '#ef5a3d' }),
+          // badge: (base) => ({ ...base, left: 'auto', right: '-0.8125em' }),
+          // controls: (base) => ({ ...base, marginTop: 100 }),
+          // close: (base) => ({ ...base, right: 'auto', left: 8, top: 8 }),
+        }}
+        >
+          <HomeIndex />
+        </TourProvider>
       </main>
     </>
   )

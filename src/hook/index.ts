@@ -24,3 +24,27 @@ export const useHeight = () => {
     return height;
   };
   
+
+  export function useScrollSections() {
+    const [currentSection, setCurrentSection] = useState(0);
+  
+    useEffect(() => {
+      const sections = document.querySelectorAll('section');
+      let current = 0;
+  
+      function handleScroll() {
+        const scrollTop = window.pageYOffset;
+        const next = sections.length - [...sections].reverse().findIndex((section) => scrollTop < section.offsetTop) - 1;
+  
+        if (next !== current) {
+          setCurrentSection(next);
+          current = next;
+        }
+      }
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+  
+    return currentSection;
+  }

@@ -1,11 +1,13 @@
 import Image from "next/image";
 import * as React from "react";
 import logocoll from "../../../public/logocoll.png";
+import info from "../../../public/info.png";
+
 import Draggable from "react-draggable";
 import { COLORS} from "../../utils/constants";
 import LogoSlice, { Direction } from "../../components/LogoSlice";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import { motion,useScroll,useSpring } from "framer-motion";
 import  {
   EarnMoreOLogo,
   EarnMoreTextElements,
@@ -14,6 +16,9 @@ import  { KeepMoreOLogo, KeepMoreTextElements } from "../../components/KeepMore"
 import  { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
 import { MakeMoreOLogo, MakeMoreTextElements } from "../../components/MakeMore";
 import BeMore from "../../components/BeMore";
+import HomeInfo from "../../components/HomeInfo";
+import { TourProvider,useTour } from '@reactour/tour'
+import { useScrollSections } from "../../hook";
 
 export interface IHomeIndexProps { }
 
@@ -30,6 +35,14 @@ export default function HomeIndex(props: IHomeIndexProps) {
   const [windowSize, setWindowSize] = React.useState({ width: 0, height: 0 });
   // const width = useWidth();
   // const height = useHeight();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+
 
   const [interpolate, setInterpolate] = React.useState(LIMIT);
   const [eventExc, setEventExc] = React.useState(false);
@@ -53,6 +66,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
     window.addEventListener("load", handleResize);
     window.addEventListener("resize", handleResize);
     handleResize();
+   
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -147,16 +161,25 @@ export default function HomeIndex(props: IHomeIndexProps) {
   // }, [])
 
   const [inView, setInView] = React.useState(false);
-  const variants = {
-    visible: { opacity: 1 },
-    hidden: {
-      opacity: 0,
-    },
-  };
+//   const onScroll = useCallback(event => {
+//     const { pageYOffset, scrollY } = window;
+//     console.log("yOffset", pageYOffset, "scrollY", scrollY);
+//     setScrollY(window.pageYOffset);
+// }, []);
 
-  console.log("active state ", active);
+// useEffect(() => {
+//   //add eventlistener to window
+//   window.addEventListener("scroll", onScroll, { passive: true });
+//   // remove event on unmount to prevent a memory leak with the cleanup
+//   return () => {
+//      window.removeEventListener("scroll", onScroll, { passive: true });
+//   }
+// }, []);
+const { setIsOpen } = useTour()
+const currentSection = useScrollSections();
   return (
     <div>
+      <div className="h-5 w-5 rounded absolute top-3 left-3 cursor-pointer" onClick={()=>setIsOpen(true)}><Image src={info} className="h-5 w-5 rounded" alt="info" /></div>
       {active && showScreen.left && (
         <motion.div
           className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
@@ -291,7 +314,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
          />
        </motion.div>
       )}
-      <div
+      <section
         className="flex h-screen items-center  justify-center opacity-1"
       >
         <Draggable
@@ -377,7 +400,8 @@ export default function HomeIndex(props: IHomeIndexProps) {
             </motion.div>
             <motion.div
               onClick={() => setActive(true)}
-              className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+              title="click to activate"
+              className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
               transition={{ duration: 2, ease: "easeOut" }}
               animate={!inView ? "visible" : "hidden"}
               variants={ {
@@ -444,8 +468,9 @@ export default function HomeIndex(props: IHomeIndexProps) {
             ></div>
           </>
         )}
-      </div>
+      </section>
       {active&&set.size>=4&& <BeMore />}
+      {active&&set.size>=4&& <HomeInfo id={1} />}
     </div>
   );
 }

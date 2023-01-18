@@ -1,20 +1,11 @@
 import Image from "next/image";
 import * as React from "react";
 import logocoll from "../../public/logocoll.png";
-import Telegram from "../../public/Telegram.png";
-import Discord from "../../public/Discord.png";
-import Signal from "../../public/Signal.png";
-
-import YouTube from "../../public/YouTube.png";
-import Twitter from "../../public/Twitter.png";
 import qo from "../../public/qo.png";
 // import Signal from "../../public/Signal.png";
 import { motion, useScroll } from "framer-motion";
 
 import { Direction } from "../components/Logo";
-import LogoSlice from "../components/LogoSlice";
-import { useHeight } from "../hook";
-import { COLORS } from "../utils/constants";
 
 export interface IBeMoreProps {}
 
@@ -39,14 +30,9 @@ export default function BeMore(props: IBeMoreProps) {
   }, []);
 
   const [inView, setInView] = React.useState(false);
-  const variants = {
-    visible: { opacity: 1 },
-    hidden: {
-      opacity: 0,
-    },
-  };
 
-  return (
+
+  return (<section>
     <motion.div
       transition={{ duration: 2, ease: "easeOut" }}
       animate={inView ? "visible" : "hidden"}
@@ -173,6 +159,6 @@ export default function BeMore(props: IBeMoreProps) {
           <Image src={qo} className="h-16 w-12" alt="logo" />
         </motion.div>
       </footer>
-    </motion.div>
+    </motion.div></section>
   );
 }
