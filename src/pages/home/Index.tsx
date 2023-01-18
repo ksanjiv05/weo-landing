@@ -2,22 +2,24 @@ import Image from "next/image";
 import * as React from "react";
 import logocoll from "../../../public/logocoll.png";
 import info from "../../../public/info.png";
+import darrow from "../../../public/darrow.png";
+
 
 import Draggable from "react-draggable";
-import { COLORS} from "../../utils/constants";
+import { COLORS } from "../../utils/constants";
 import LogoSlice, { Direction } from "../../components/LogoSlice";
 import { useRouter } from "next/router";
-import { motion,useScroll,useSpring } from "framer-motion";
-import  {
+import { motion, useScroll, useSpring } from "framer-motion";
+import {
   EarnMoreOLogo,
   EarnMoreTextElements,
 } from "../../components/EarnMore";
-import  { KeepMoreOLogo, KeepMoreTextElements } from "../../components/KeepMore";
-import  { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
+import { KeepMoreOLogo, KeepMoreTextElements } from "../../components/KeepMore";
+import { GetMoreOLogo, GetMoreTextElements } from "../../components/GetMore";
 import { MakeMoreOLogo, MakeMoreTextElements } from "../../components/MakeMore";
 import BeMore from "../../components/BeMore";
 import HomeInfo from "../../components/HomeInfo";
-import { TourProvider,useTour } from '@reactour/tour'
+import { TourProvider, useTour } from '@reactour/tour'
 import { useScrollSections } from "../../hook";
 
 export interface IHomeIndexProps { }
@@ -66,7 +68,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
     window.addEventListener("load", handleResize);
     window.addEventListener("resize", handleResize);
     handleResize();
-   
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -93,9 +95,9 @@ export default function HomeIndex(props: IHomeIndexProps) {
   };
 
   function handleShowScreen(key: string) {
-    console.log(key,set,set.size);
+    console.log(key, set, set.size);
     set.add(key);
-    
+
     switch (key) {
       case "left":
         setShowScreen({
@@ -121,7 +123,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
           right: false,
         });
         break;
-        case "top":
+      case "top":
         setShowScreen({
           top: true,
           bottom: false,
@@ -161,25 +163,25 @@ export default function HomeIndex(props: IHomeIndexProps) {
   // }, [])
 
   const [inView, setInView] = React.useState(false);
-//   const onScroll = useCallback(event => {
-//     const { pageYOffset, scrollY } = window;
-//     console.log("yOffset", pageYOffset, "scrollY", scrollY);
-//     setScrollY(window.pageYOffset);
-// }, []);
+  //   const onScroll = useCallback(event => {
+  //     const { pageYOffset, scrollY } = window;
+  //     console.log("yOffset", pageYOffset, "scrollY", scrollY);
+  //     setScrollY(window.pageYOffset);
+  // }, []);
 
-// useEffect(() => {
-//   //add eventlistener to window
-//   window.addEventListener("scroll", onScroll, { passive: true });
-//   // remove event on unmount to prevent a memory leak with the cleanup
-//   return () => {
-//      window.removeEventListener("scroll", onScroll, { passive: true });
-//   }
-// }, []);
-const { setIsOpen } = useTour()
-const currentSection = useScrollSections();
+  // useEffect(() => {
+  //   //add eventlistener to window
+  //   window.addEventListener("scroll", onScroll, { passive: true });
+  //   // remove event on unmount to prevent a memory leak with the cleanup
+  //   return () => {
+  //      window.removeEventListener("scroll", onScroll, { passive: true });
+  //   }
+  // }, []);
+  const { setIsOpen } = useTour()
+  const currentSection = useScrollSections();
   return (
     <div>
-      <div className="h-5 w-5 rounded absolute top-3 left-3 cursor-pointer" onClick={()=>setIsOpen(true)}><Image src={info} className="h-5 w-5 rounded" alt="info" /></div>
+      {!active && <div className="h-5 w-5 rounded absolute top-3 left-3 cursor-pointer" onClick={() => setIsOpen(true)}><Image src={info} className="h-5 w-5 rounded" alt="info" /></div>}
       {active && showScreen.left && (
         <motion.div
           className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
@@ -202,7 +204,7 @@ const currentSection = useScrollSections();
               hidden: { x: -900 },
             }}
             initial="hidden"
-           
+
           />
           <EarnMoreOLogo
             transition={{ duration: 2, ease: "easeOut" }}
@@ -216,103 +218,103 @@ const currentSection = useScrollSections();
         </motion.div>
       )}
       {active && showScreen.right && (
-         <motion.div
-         className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
-         transition={{ duration: 2, ease: "easeOut" }}
-         animate={inView ? "visible" : "hidden"}
-         variants={{
-           visible: { opacity: 1 },
-           hidden: {
-             opacity: 0,
-           },
-         }}
-         initial="hidden"
-         style={{ backgroundColor: COLORS.RIGHT_COLOR }}
-       >
-         <KeepMoreTextElements
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-             visible: { x: 350 },
-             hidden: { x: 900 },
-           }}
-           initial="hidden"
-         />
-         <KeepMoreOLogo
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-             hidden: { rotateY: 180, },
-             visible: { rotateY: 0, },
-           }}
-         />
-       </motion.div>
+        <motion.div
+          className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
+          transition={{ duration: 2, ease: "easeOut" }}
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            visible: { opacity: 1 },
+            hidden: {
+              opacity: 0,
+            },
+          }}
+          initial="hidden"
+          style={{ backgroundColor: COLORS.RIGHT_COLOR }}
+        >
+          <KeepMoreTextElements
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              visible: { x: 350 },
+              hidden: { x: 900 },
+            }}
+            initial="hidden"
+          />
+          <KeepMoreOLogo
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              hidden: { rotateY: 180, },
+              visible: { rotateY: 0, },
+            }}
+          />
+        </motion.div>
       )}
       {active && showScreen.bottom && (
-         <motion.div
-         className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
-         transition={{ duration: 2, ease: "easeOut" }}
-         animate={inView ? "visible" : "hidden"}
-         variants={{
-           visible: { opacity: 1 },
-           hidden: {
-             opacity: 0,
-           },
-         }}
-         initial="hidden"
-         style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
-       >
-         <GetMoreTextElements
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-             visible: { y: -200 },
-             hidden: { y: 900 },
-           }}
-           initial="hidden"
-         />
-         <GetMoreOLogo
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-            hidden: { rotateY: 180, },
-             visible: { rotateY: 0, },
-           }}
-         />
-       </motion.div>
+        <motion.div
+          className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
+          transition={{ duration: 2, ease: "easeOut" }}
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            visible: { opacity: 1 },
+            hidden: {
+              opacity: 0,
+            },
+          }}
+          initial="hidden"
+          style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
+        >
+          <GetMoreTextElements
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              visible: { y: -200 },
+              hidden: { y: 900 },
+            }}
+            initial="hidden"
+          />
+          <GetMoreOLogo
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              hidden: { rotateY: 180, },
+              visible: { rotateY: 0, },
+            }}
+          />
+        </motion.div>
       )}
-       {active && showScreen.top && (
-         <motion.div
-         className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
-         transition={{ duration: 2, ease: "easeOut" }}
-         animate={inView ? "visible" : "hidden"}
-         variants={{
-           visible: { opacity: 1 },
-           hidden: {
-             opacity: 0,
-           },
-         }}
-         initial="hidden"
-         style={{ backgroundColor: COLORS.TOP }}
-       >
-         <MakeMoreTextElements
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-             visible: { y: 200 },
-             hidden: { y: -900 },
-           }}
-           initial="hidden"
-         />
-         <MakeMoreOLogo
-           transition={{ duration: 2, ease: "easeOut" }}
-           animate={inView ? "visible" : "hidden"}
-           variants={{
-            hidden: { rotateY: 180, },
-            visible: { rotateY: 0, },
-           }}
-         />
-       </motion.div>
+      {active && showScreen.top && (
+        <motion.div
+          className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
+          transition={{ duration: 2, ease: "easeOut" }}
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            visible: { opacity: 1 },
+            hidden: {
+              opacity: 0,
+            },
+          }}
+          initial="hidden"
+          style={{ backgroundColor: COLORS.TOP }}
+        >
+          <MakeMoreTextElements
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              visible: { y: 200 },
+              hidden: { y: -900 },
+            }}
+            initial="hidden"
+          />
+          <MakeMoreOLogo
+            transition={{ duration: 2, ease: "easeOut" }}
+            animate={inView ? "visible" : "hidden"}
+            variants={{
+              hidden: { rotateY: 180, },
+              visible: { rotateY: 0, },
+            }}
+          />
+        </motion.div>
       )}
       <section
         className="flex h-screen items-center  justify-center opacity-1"
@@ -404,7 +406,7 @@ const currentSection = useScrollSections();
               className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
               transition={{ duration: 2, ease: "easeOut" }}
               animate={!inView ? "visible" : "hidden"}
-              variants={ {
+              variants={{
                 hidden: { rotateY: 180, opacity: 0 },
                 visible: { rotateY: 0, opacity: 1 },
               }}
@@ -468,9 +470,14 @@ const currentSection = useScrollSections();
             ></div>
           </>
         )}
+        {active && set.size >= 4 && <motion.div transition={{repeat:30}} animate={{
+          y:[10,0,10]
+        }} className=" h-16 w-8 absolute bottom-8 flex items-center justify-center">
+          <Image src={darrow} className="h-12 w-8 rounded" alt="info" />
+        </motion.div>}
       </section>
-      {active&&set.size>=4&& <BeMore />}
-      {active&&set.size>=4&& <HomeInfo id={1} />}
+      {active && set.size >= 4 && <BeMore />}
+      {active && set.size >= 4 && <HomeInfo id={1} />}
     </div>
   );
 }
