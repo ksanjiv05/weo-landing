@@ -27,6 +27,7 @@ export default function Home() {
             ...base,
             '--reactour-accent': '#ef5a3d',
             borderRadius: 30,
+            display:"none"
           }),
           maskArea: (base) => ({ ...base, rx: 300 }),
           // maskWrapper: (base) => ({ ...base, color: '#ef5a3d' }),

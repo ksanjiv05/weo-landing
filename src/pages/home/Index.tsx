@@ -58,6 +58,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
   const [thrashold, setThreshold] = React.useState(0);
 
   React.useEffect(() => {
+    setIsOpen(true)
     const handleResize = () => {
       console.log("use effec", window.Event.name);
       return setWindowSize({
@@ -401,7 +402,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
               )}
             </motion.div>
             <motion.div
-              onClick={() => setActive(true)}
+              onClick={() => {setActive(true);setIsOpen(false)}}
               title="click to activate"
               className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
               transition={{ duration: 2, ease: "easeOut" }}
@@ -453,8 +454,9 @@ export default function HomeIndex(props: IHomeIndexProps) {
               onMouseLeave={() => setInView(false)}
               className=" absolute left-0"
               style={{
-                height: windowSize.width / 2.5,
-                width: windowSize.height / 3.6,
+                height: windowSize.height / 1.5,
+                width: windowSize.width / 3.2,
+                // backgroundColor:"red"
               }}
             ></div>
             <div
@@ -463,9 +465,9 @@ export default function HomeIndex(props: IHomeIndexProps) {
               onMouseLeave={() => setInView(false)}
               className=" absolute right-0"
               style={{
-                height: windowSize.width / 2.5,
-                width: windowSize.height / 4,
-                // backgroundColor: "red",
+                height: windowSize.height / 1.5,
+                width: windowSize.width / 3.2,
+                // backgroundColor:"red"
               }}
             ></div>
           </>
