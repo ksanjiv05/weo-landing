@@ -115,13 +115,13 @@ export const MakeMoreTextElements = (props:any) => {
     >
       <motion.div {...props} className="flex max-sm:items-center max-sm:justify-center">
         <h1 className=" text-8xl font-bold" style={{ color: "#ffffff4a" }}>
-          Make more
+          make more
         </h1>
       </motion.div>
       
       <motion.div {...props} transition={{ duration: 4, ease: "easeOut" }} className="flex max-sm:items-center max-sm:justify-center mt-4 text-center">
         <p style={{ color: "#ffffff" }}>
-          Options open to Collected and Share the Best Offer
+          2-Way Custom Subscription Offers People Love!
         </p>
       </motion.div>
     </motion.div>

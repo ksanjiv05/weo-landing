@@ -402,7 +402,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
               )}
             </motion.div>
             <motion.div
-              onClick={() => {setActive(true);setIsOpen(false)}}
+              onClick={() => { setActive(true); setIsOpen(false) }}
               title="click to activate"
               className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
               transition={{ duration: 2, ease: "easeOut" }}
@@ -427,11 +427,16 @@ export default function HomeIndex(props: IHomeIndexProps) {
               onMouseOver={() => handleShowScreen("bottom")}
               onMouseEnter={() => setInView(true)}
               onMouseLeave={() => setInView(false)}
-              className=" absolute bottom-0"
+              className=" absolute bottom-0 rotate-45"
               style={{
-                width: windowSize.width / 3.5,
-                height: windowSize.height / 4.5,
+                // width: windowSize.width / 3.5,
+                // height: windowSize.height / 3.5,
                 // backgroundColor: "red",
+                width: windowSize.height, /// 3.5,
+                height: windowSize.height, /// 3.5,
+                // backgroundColor: "red",
+                bottom: -windowSize.height /1.3,
+                borderRadius: 222
               }}
             ></div>
             <div
@@ -439,11 +444,13 @@ export default function HomeIndex(props: IHomeIndexProps) {
               onMouseOver={() => handleShowScreen("top")}
               onMouseEnter={() => setInView(true)}
               onMouseLeave={() => setInView(false)}
-              className=" absolute top-0"
+              className=" absolute top-0 rotate-45"
               style={{
-                width: windowSize.width / 3.5,
-                height: windowSize.height / 4.5,
+                width: windowSize.height, /// 3.5,
+                height: windowSize.height, /// 3.5,
                 // backgroundColor: "red",
+                top: -windowSize.height /1.3,
+                borderRadius: 222
               }}
             ></div>
             <div
@@ -452,28 +459,35 @@ export default function HomeIndex(props: IHomeIndexProps) {
               }}
               onMouseEnter={() => setInView(true)}
               onMouseLeave={() => setInView(false)}
-              className=" absolute left-0"
+              className=" absolute left-0 rotate-45"
               style={{
-                height: windowSize.height / 1.5,
-                width: windowSize.width / 3.2,
-                // backgroundColor:"red"
+                height: windowSize.width / 2,// / 1.5,
+                width: windowSize.width / 2,// / 2.9,
+                // backgroundColor: "red",
+                left: -windowSize.width / 5,
+                borderRadius: 20
               }}
             ></div>
             <div
               onMouseOver={() => handleShowScreen("right")}
               onMouseEnter={() => setInView(true)}
               onMouseLeave={() => setInView(false)}
-              className=" absolute right-0"
+              className=" absolute right-0 rotate-45"
               style={{
-                height: windowSize.height / 1.5,
-                width: windowSize.width / 3.2,
+                // height: windowSize.height / 1.5,
+                // width: windowSize.width / 2.9,
                 // backgroundColor:"red"
+                height: windowSize.width / 2,// / 1.5,
+                width: windowSize.width / 2,// / 2.9,
+                // backgroundColor: "red",
+                right: -windowSize.width / 5,
+                borderRadius: 20
               }}
             ></div>
           </>
         )}
-        {active && set.size >= 4 && <motion.div transition={{repeat:30}} animate={{
-          y:[10,0,10]
+        {active && set.size >= 4 && <motion.div transition={{ repeat: 30 }} animate={{
+          y: [10, 0, 10]
         }} className=" h-16 w-8 absolute bottom-8 flex items-center justify-center">
           <Image src={darrow} className="h-12 w-8 rounded" alt="info" />
         </motion.div>}

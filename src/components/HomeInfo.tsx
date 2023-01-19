@@ -156,7 +156,7 @@ export default function HomeInfo({ id }: IHomeInfoProps) {
               className=" font-bold"
               style={{ color: "#ffffff4a", fontSize: 35, marginLeft: 10 }}
             >
-              Marketplace,
+              marketplace,
             </h1>
             <h1
               className=" font-bold"
@@ -184,8 +184,8 @@ export default function HomeInfo({ id }: IHomeInfoProps) {
             className=" flex items-center justify-center"
           >
             <h1 className="" style={{ color: "#fff" }}>
-              Once built for release, you'll be able to distribute the app to
-              beta testers and submit the app
+              Create, Connect, Collect and Earn More with Direct 2-Way Loyalty,Credibility and
+              
             </h1>
           </motion.div>
           <motion.div
@@ -201,7 +201,7 @@ export default function HomeInfo({ id }: IHomeInfoProps) {
             className=" flex items-center justify-center"
           >
             <h1 className="" style={{ color: "#fff" }}>
-              Once built for release, you'll be abl app
+            Access Currency that We Co-Create and Control with Real World Web5 Tools.
             </h1>
           </motion.div>
         </div>

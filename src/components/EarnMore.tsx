@@ -119,7 +119,7 @@ export const EarnMoreTextElements = (props:any) => {
       </motion.div>
       <motion.div {...props} transition={{ duration: 4, ease: "easeOut" }} className="flex max-sm:items-center max-sm:justify-center mt-4 text-center">
         <p style={{ color: "#ffffff" }}>
-          Options open to Collected and Share the Best Offer
+          Prepaid Customer Commitments.
         </p>
       </motion.div>
     </motion.div>

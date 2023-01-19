@@ -138,7 +138,7 @@ export default function BeMore(props: IBeMoreProps) {
           className=" flex items-center justify-center"
         >
           <h1 className="" style={{ color: "#fff" }}>
-            Once built for release, you'll be able to distribute the app to
+            with Real Time Returns Between Me and You
           </h1>
         </motion.div>
       </div>
