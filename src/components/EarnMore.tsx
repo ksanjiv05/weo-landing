@@ -2,7 +2,6 @@ import * as React from "react";
 import { COLORS } from "../utils/constants";
 import { motion } from "framer-motion";
 
-
 // const OLogo = () => {
 //   const router = useRouter()
 //   return <div className='flex-1 p-4 flex items-center  justify-start max-sm:justify-center'>
@@ -101,26 +100,48 @@ import { motion } from "framer-motion";
 //   );
 // }
 
-export const EarnMoreTextElements = (props:any) => {
+export const EarnMoreTextElements = ({ inView = false }) => {
   return (
-    <motion.div
-      
-      className="p-4 flex-col  max-sm:flex-row flex max-sm:block justify-center items-end"
-    >
-      <motion.div {...props} className="flex max-sm:items-center max-sm:justify-center">
+    <motion.div className="p-4 flex-col  max-sm:flex-row flex max-sm:block justify-center items-end">
+      <motion.div
+        transition={{ duration: 2, ease: "easeOut" }}
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          visible: { x: -350 },
+          hidden: { x: -900 },
+        }}
+        initial="hidden"
+        className="flex max-sm:items-center max-sm:justify-center"
+      >
         <h1 className=" text-8xl font-bold" style={{ color: "#ffffff4a" }}>
           earn
         </h1>
       </motion.div>
-      <motion.div {...props} className="flex max-sm:items-center max-sm:justify-center">
+      <motion.div
+        transition={{ duration: 2, ease: "easeOut" }}
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          visible: { x: -350 },
+          hidden: { x: -900 },
+        }}
+        initial="hidden"
+        className="flex max-sm:items-center max-sm:justify-center"
+      >
         <h1 className=" text-8xl font-bold" style={{ color: "#ffffff4a" }}>
           more
         </h1>
       </motion.div>
-      <motion.div {...props} transition={{ duration: 4, ease: "easeOut" }} className="flex max-sm:items-center max-sm:justify-center mt-4 text-center">
-        <p style={{ color: "#ffffff" }}>
-          Prepaid Customer Commitments.
-        </p>
+      <motion.div
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          visible: { x: -350, opacity: 1 },
+          hidden: { x: -350, opacity: 0 },
+        }}
+        initial="hidden"
+        transition={{ delay: 2,duration:2, ease: "easeOut" }}
+        className="flex max-sm:items-center max-sm:justify-center mt-4 text-center"
+      >
+        <p style={{ color: "#ffffff" }}>Prepaid Customer Commitments.</p>
       </motion.div>
     </motion.div>
   );
@@ -128,23 +149,32 @@ export const EarnMoreTextElements = (props:any) => {
 
 export const EarnMoreOLogo = (props: any) => {
   return (
-    <div
-      
-      className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_16px_rgba(0,0,0,0.45)] flex items-center justify-center"
-    >
-      <motion.div
-        className="h-36 w-36 absolute rounded-full border-2 flex items-center"
+    <div className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_16px_rgba(0,0,0,0.45)] flex items-center justify-center">
+      <div
+        className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
         style={{ backgroundColor: COLORS.LEFT_COLOR }}
-        {...props}
+        
       >
-        <div className="h-4 w-4 absolute rounded-full right-3 bg-white"></div>
-        <div className="h-12 w-12 absolute bg-white rounded-full flex items-center justify-center right-8">
+        <div className="h-4 w-4 absolute rounded-full right-2 bg-white"></div>
+        {/* <motion.div {...props} className="h-12 w-12 absolute bg-white rounded-full flex items-center justify-center right-8">
           <div
+          
             className="h-8 w-8 absolute rounded-full border-2 flex items-center justify-center"
             style={{ backgroundColor: COLORS.LEFT_COLOR }}
           ></div>
-        </div>
-      </motion.div>
+        </motion.div> */}
+         <motion.div
+              title="click to activate"
+              className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
+              {...props}
+              initial="hidden"
+            >
+              <div
+                className="h-10 w-10 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+                style={{ backgroundColor: COLORS.LEFT_COLOR }}
+              ></div>
+            </motion.div>
+      </div>
     </div>
   );
 };

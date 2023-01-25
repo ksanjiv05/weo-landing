@@ -55,12 +55,13 @@ export default function HomeIndex(props: IHomeIndexProps) {
     left: false,
     right: false,
   });
+  const [moveLogo, setMoveLogo] = React.useState("hidden");
   const [thrashold, setThreshold] = React.useState(0);
 
   React.useEffect(() => {
     setIsOpen(true)
     const handleResize = () => {
-      console.log("use effec", window.Event.name);
+      // console.log("use effec", window.Event.name);
       return setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -107,7 +108,9 @@ export default function HomeIndex(props: IHomeIndexProps) {
           left: true,
           right: false,
         });
+        setMoveLogo("left")
         break;
+
       case "right":
         setShowScreen({
           top: false,
@@ -115,6 +118,8 @@ export default function HomeIndex(props: IHomeIndexProps) {
           left: false,
           right: true,
         });
+        setMoveLogo("right")
+
         break;
       case "bottom":
         setShowScreen({
@@ -123,6 +128,8 @@ export default function HomeIndex(props: IHomeIndexProps) {
           left: false,
           right: false,
         });
+        setMoveLogo("bottom")
+
         break;
       case "top":
         setShowScreen({
@@ -131,6 +138,8 @@ export default function HomeIndex(props: IHomeIndexProps) {
           left: false,
           right: false,
         });
+        setMoveLogo("top")
+
         break;
       default:
         setShowScreen({
@@ -182,7 +191,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
   const currentSection = useScrollSections();
   return (
     <div>
-      {!active && <div className="h-5 w-5 rounded absolute top-3 left-3 cursor-pointer" onClick={() => setIsOpen(true)}><Image src={info} className="h-5 w-5 rounded" alt="info" /></div>}
+      {/* {!active && <div className="h-5 w-5 rounded absolute top-3 left-3 cursor-pointer" onClick={() => setIsOpen(true)}><Image src={info} className="h-5 w-5 rounded" alt="info" /></div>} */}
       {active && showScreen.left && (
         <motion.div
           className=" absolute h-screen w-screen flex items-center  justify-center top-0 flex-row"
@@ -198,21 +207,15 @@ export default function HomeIndex(props: IHomeIndexProps) {
           style={{ backgroundColor: COLORS.LEFT_COLOR }}
         >
           <EarnMoreTextElements
-            transition={{ duration: 2, ease: "easeOut" }}
-            animate={inView ? "visible" : "hidden"}
-            variants={{
-              visible: { x: -350 },
-              hidden: { x: -900 },
-            }}
-            initial="hidden"
+            inView={inView}
 
           />
           <EarnMoreOLogo
             transition={{ duration: 2, ease: "easeOut" }}
             animate={inView ? "visible" : "hidden"}
             variants={{
-              hidden: { rotateY: 180, },
-              visible: { rotateY: 0, },
+             hidden: {  opacity: 1,x:0 },
+             visible: { opacity: 1,x:12 },
             }}
 
           />
@@ -233,20 +236,15 @@ export default function HomeIndex(props: IHomeIndexProps) {
           style={{ backgroundColor: COLORS.RIGHT_COLOR }}
         >
           <KeepMoreTextElements
-            transition={{ duration: 2, ease: "easeOut" }}
-            animate={inView ? "visible" : "hidden"}
-            variants={{
-              visible: { x: 350 },
-              hidden: { x: 900 },
-            }}
-            initial="hidden"
+            
+            inView={inView}
           />
           <KeepMoreOLogo
             transition={{ duration: 2, ease: "easeOut" }}
             animate={inView ? "visible" : "hidden"}
             variants={{
-              hidden: { rotateY: 180, },
-              visible: { rotateY: 0, },
+             hidden: {  opacity: 1,x:0 },
+             visible: { opacity: 1,x:-12 },
             }}
           />
         </motion.div>
@@ -266,20 +264,14 @@ export default function HomeIndex(props: IHomeIndexProps) {
           style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
         >
           <GetMoreTextElements
-            transition={{ duration: 2, ease: "easeOut" }}
-            animate={inView ? "visible" : "hidden"}
-            variants={{
-              visible: { y: -200 },
-              hidden: { y: 900 },
-            }}
-            initial="hidden"
+            inView={inView}
           />
           <GetMoreOLogo
             transition={{ duration: 2, ease: "easeOut" }}
             animate={inView ? "visible" : "hidden"}
             variants={{
-              hidden: { rotateY: 180, },
-              visible: { rotateY: 0, },
+             hidden: {  opacity: 1,y:0 },
+             visible: { opacity: 1,y:-12 },
             }}
           />
         </motion.div>
@@ -299,20 +291,15 @@ export default function HomeIndex(props: IHomeIndexProps) {
           style={{ backgroundColor: COLORS.TOP }}
         >
           <MakeMoreTextElements
-            transition={{ duration: 2, ease: "easeOut" }}
-            animate={inView ? "visible" : "hidden"}
-            variants={{
-              visible: { y: 200 },
-              hidden: { y: -900 },
-            }}
-            initial="hidden"
+            inView={inView}
           />
           <MakeMoreOLogo
             transition={{ duration: 2, ease: "easeOut" }}
+
             animate={inView ? "visible" : "hidden"}
             variants={{
-              hidden: { rotateY: 180, },
-              visible: { rotateY: 0, },
+             hidden: {  opacity: 1,y:0 },
+             visible: { opacity: 1,y:12 },
             }}
           />
         </motion.div>
@@ -389,13 +376,13 @@ export default function HomeIndex(props: IHomeIndexProps) {
             <motion.div
               className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
               style={{ backgroundColor: "#525252" }}
-              transition={{ duration: 2, ease: "easeOut" }}
-              animate={!inView ? "visible" : "hidden"}
-              variants={{
-                hidden: { rotateY: 180, opacity: 0 },
-                visible: { rotateY: 0, opacity: 1 },
-              }}
-              initial="visible"
+              // transition={{ duration: 2, ease: "easeOut" }}
+              // animate={!inView ? "visible" : "hidden"}
+              // variants={{
+              //   hidden: { rotateY: 180, opacity: 0 },
+              //   visible: { rotateY: 0, opacity: 1 },
+              // }}
+              // initial="visible"
             >
               {active && (
                 <Image src={logocoll} className="h-28 w-28" alt="logo" />
@@ -406,32 +393,42 @@ export default function HomeIndex(props: IHomeIndexProps) {
               title="click to activate"
               className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
               transition={{ duration: 2, ease: "easeOut" }}
-              animate={!inView ? "visible" : "hidden"}
+              // animate={!inView ? "visible" : "hidden"}
+              // variants={{
+              //   hidden: { rotateY: 180, opacity: 0,x:0 },
+              //   visible: { rotateY: 0, opacity: 1,x:12 },
+              // }}
+              animate={moveLogo}
               variants={{
-                hidden: { rotateY: 180, opacity: 0 },
-                visible: { rotateY: 0, opacity: 1 },
+                hidden: {  opacity: 1,x:0 },
+                left: { opacity: 1,x:12 },
+                right: { opacity: 1,x:-12 },
+                top: { opacity: 1,y:12},
+                bottom: { opacity: 1,y:-12 },
+
               }}
-              initial="visible"
+              initial="hidden"
             >
               <div
-                className="h-8 w-8 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+                className="h-10 w-10 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
                 style={{ backgroundColor: "#525252" }}
               ></div>
             </motion.div>
 
           </div>
         </Draggable>
+
+
+
+        
         {active && (
           <>
             <div
               onMouseOver={() => handleShowScreen("bottom")}
               onMouseEnter={() => setInView(true)}
-              onMouseLeave={() => setInView(false)}
+              onMouseLeave={() => {setInView(false);setMoveLogo("hidden")}}
               className=" absolute bottom-0 rotate-45"
               style={{
-                // width: windowSize.width / 3.5,
-                // height: windowSize.height / 3.5,
-                // backgroundColor: "red",
                 width: windowSize.height, /// 3.5,
                 height: windowSize.height, /// 3.5,
                 // backgroundColor: "red",
@@ -443,7 +440,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
               // onMouseEnter={() => router.push("/MakeMore")}
               onMouseOver={() => handleShowScreen("top")}
               onMouseEnter={() => setInView(true)}
-              onMouseLeave={() => setInView(false)}
+              onMouseLeave={() => {setInView(false);setMoveLogo("hidden")}}
               className=" absolute top-0 rotate-45"
               style={{
                 width: windowSize.height, /// 3.5,
@@ -458,7 +455,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
                 handleShowScreen("left");
               }}
               onMouseEnter={() => setInView(true)}
-              onMouseLeave={() => setInView(false)}
+              onMouseLeave={() => {setInView(false);setMoveLogo("hidden")}}
               className=" absolute left-0 rotate-45"
               style={{
                 height: windowSize.width / 2,// / 1.5,
@@ -471,7 +468,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
             <div
               onMouseOver={() => handleShowScreen("right")}
               onMouseEnter={() => setInView(true)}
-              onMouseLeave={() => setInView(false)}
+              onMouseLeave={() => {setInView(false);setMoveLogo("hidden")}}
               className=" absolute right-0 rotate-45"
               style={{
                 // height: windowSize.height / 1.5,
@@ -493,7 +490,14 @@ export default function HomeIndex(props: IHomeIndexProps) {
         </motion.div>}
       </section>
       {active && set.size >= 4 && <BeMore />}
-      {active && set.size >= 4 && <HomeInfo id={1} />}
+      {/* {active && set.size >= 4 && <HomeInfo id={1} />} */}
+
+      {/* <div className=" h-screen flex bg-slate-400 sticky top-0">
+        hii i am 
+      </div>
+      <div className=" h-screen flex bg-black">
+        hii i am 
+      </div> */}
     </div>
   );
 }

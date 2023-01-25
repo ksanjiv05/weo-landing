@@ -117,46 +117,67 @@ const OLogo = () => {
 //   );
 // }
 
-
-export const GetMoreTextElements = (props:any) => {
-    return (
+export const GetMoreTextElements = ({ inView=false }) => {
+  return (
+    <motion.div className="p-4 flex-col  max-sm:flex-row flex max-sm:block justify-center items-end">
       <motion.div
-        className="p-4 flex-col  max-sm:flex-row flex max-sm:block justify-center items-end"
+        transition={{ duration: 2, ease: "easeOut" }}
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          visible: { y: -200 },
+          hidden: { y: 900 },
+        }}
+        initial="hidden"
+        className="flex max-sm:items-center max-sm:justify-center"
       >
-        <motion.div {...props}  className="flex max-sm:items-center max-sm:justify-center">
-          <h1 className=" text-8xl font-bold" style={{ color: "#ffffff4a" }}>
-            get more
-          </h1>
-        </motion.div>
-        
-        <motion.div {...props}  transition={{ duration: 4, ease: "easeOut" }} className="flex max-sm:items-center max-sm:justify-center mt-4 text-center">
-          <p style={{ color: "#ffffff" }}>
-            2-Way Negotiable Custom Offers!
-          </p>
+        <h1 className=" text-8xl font-bold" style={{ color: "#ffffff4a" }}>
+          get more
+        </h1>
+      </motion.div>
+
+      <motion.div
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          visible: { y: -200, opacity: 1 },
+          hidden: { y: -200, opacity: 0 },
+        }}
+        initial="hidden"
+        transition={{ delay: 2, duration: 2, ease: "easeOut" }}
+        className="flex max-sm:items-center max-sm:justify-center mt-4 text-center"
+      >
+        <p style={{ color: "#ffffff" }}>2-Way Negotiable Custom Offers!</p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export const GetMoreOLogo = (props: any) => {
+  return (
+    <div className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_16px_rgba(0,0,0,0.45)] flex items-center justify-center">
+      <motion.div
+        className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
+        style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
+        // {...props}
+      >
+        <div className="h-4 w-4 absolute rounded-full top-2 bg-white"></div>
+        {/* <div className="h-12 w-12 absolute bg-white rounded-full flex items-center justify-center top-8">
+          <div
+            className="h-8 w-8 absolute rounded-full border-2 flex items-center justify-center"
+            style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
+          ></div>
+        </div> */}
+        <motion.div
+          title="click to activate"
+          className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
+          {...props}
+          initial="hidden"
+        >
+          <div
+            className="h-10 w-10 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+            style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
+          ></div>
         </motion.div>
       </motion.div>
-    );
-  };
-  
-  export const GetMoreOLogo = (props: any) => {
-    return (
-      <div
-        
-        className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_16px_rgba(0,0,0,0.45)] flex items-center justify-center"
-      >
-        <motion.div
-          className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
-          style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
-          {...props}
-        >
-          <div className="h-4 w-4 absolute rounded-full top-3 bg-white"></div>
-          <div className="h-12 w-12 absolute bg-white rounded-full flex items-center justify-center top-8">
-            <div
-              className="h-8 w-8 absolute rounded-full border-2 flex items-center justify-center"
-              style={{ backgroundColor: COLORS.BOTTOM_COLOR }}
-            ></div>
-          </div>
-        </motion.div>
-      </div>
-    );
-  };
+    </div>
+  );
+};
