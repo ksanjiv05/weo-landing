@@ -34,20 +34,20 @@ export default function BeMore(props: IBeMoreProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const onScroll = React.useCallback((event) => {
-    const { scrollY, innerHeight } = window;
-    console.log("_______________", innerHeight < scrollY, innerHeight, scrollY);
-    if (innerHeight + innerHeight / 2.5 < scrollY) {
-      // setInView(false)
-      setShowInfo(true);
-    } else if (2 * innerHeight + innerHeight / 2.5 < scrollY) {
-      setShowIcon(true);
-    } else {
-      setShowInfo(false);
-      setShowIcon(false);
-    }
-    // setScrollY(window.pageYOffset);
-  }, []);
+  // const onScroll = React.useCallback((event) => {
+  //   const { scrollY, innerHeight } = window;
+  //   console.log("_______________", innerHeight < scrollY, innerHeight, scrollY);
+  //   if (innerHeight + innerHeight / 2.5 < scrollY) {
+  //     // setInView(false)
+  //     setShowInfo(true);
+  //   } else if (2 * innerHeight + innerHeight / 2.5 < scrollY) {
+  //     setShowIcon(true);
+  //   } else {
+  //     setShowInfo(false);
+  //     setShowIcon(false);
+  //   }
+  //   // setScrollY(window.pageYOffset);
+  // }, []);
 
   const hideHomeinfo = () => {
     setShowInfo(false);
@@ -57,36 +57,46 @@ export default function BeMore(props: IBeMoreProps) {
     setShowInfo(false);
   };
 
-  React.useEffect(() => {
-    //add eventlistener to window
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // window.addEventListener("scrollend", ()=>console.log("_L_"));
-    // remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   //add eventlistener to window
+  //   window.addEventListener("scroll", onScroll, { passive: true });
+  //   // window.addEventListener("scrollend", ()=>console.log("_L_"));
+  //   // remove event on unmount to prevent a memory leak with the cleanup
+  //   return () => {
+  //     window.removeEventListener("scroll", onScroll);
+  //   };
+  // }, []);
   const [inView, setInView] = React.useState(false);
+
+
+  React.useEffect(() => {
+    let timerId = setInterval(() => {
+      setShowIcon(p=>!p);
+      console.log("discord active",showIcon);
+    }, 8000);
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
     <section>
       <div className="h-screen sticky bottom-0 top-0">
         <motion.div
           transition={{ duration: 2, ease: "easeOut" }}
-          animate={inView ? "visible" : "hidden"}
+          animate={!showIcon ? "visible" : "hidden"}
           variants={{
             visible: { backgroundColor: "#525252" },
             hidden: {
-              backgroundColor: "#000000",
+              backgroundColor: "#ffffff",
             },
           }}
-          initial="hidden"
+          initial="visible"
           onMouseEnter={() => {
             setInView(true);
-            setShowInfo(false);
+            // setShowInfo(false);
+            setShowIcon(false);
           }}
-          onMouseLeave={() => setInView(false)}
-          className="h-screen flex flex-col justify-between "
+          // onMouseLeave={() => setInView(false)}
+          className="h-screen flex flex-col justify-center "
           // onScroll={() => alert("scroll")}
         >
           <div className="flex flex-1 items-end pb-8  justify-center">
@@ -143,16 +153,40 @@ export default function BeMore(props: IBeMoreProps) {
                 {!showHomeInfo && (
                   <Image src={logocoll} className="h-28 w-28" alt="logo" />
                 )}
-                <motion.div className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]">
+                <motion.div                  transition={{ duration: 2, ease: "easeOut" }} animate={showIcon?"hidden":"visable"} variants={{visable:{opacity:1 },hidden:{ opacity:0}}}  className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]">
                   <div
                     className="h-8 w-8 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
                     style={{ backgroundColor: "#525252" }}
                   >
-                    {showIcon && (
-                      <Image src={Discord} className="h-8 w-8" alt="logo" />
-                    )}
                   </div>
                 </motion.div>
+
+                <motion.div
+                transition={{ duration: 2, ease: "easeOut" }} animate={!showIcon?"hidden":"visable"} variants={{visable:{opacity:1 },hidden:{ opacity:0}}}  
+ 
+                className="h-36 w-36 absolute flex items-center justify-center flex-col">
+                    <Image src={Discord} className="h-10 w-10 " alt="logo" />
+                    <p
+                      className="text-xl flex "
+                      style={{
+                        color: "#fff",
+                        marginTop: -10,
+                        textAlign: "center",
+                      }}
+                    >
+                      Get
+                    </p>
+                    <p
+                      className="text-xl flex "
+                      style={{
+                        color: "#fff",
+                        marginTop: -10,
+                        textAlign: "center",
+                      }}
+                    >
+                      Invited
+                    </p>
+                  </motion.div>
               </div>
             </motion.div>
           </div>
@@ -197,7 +231,7 @@ export default function BeMore(props: IBeMoreProps) {
               </h1>
             </motion.div>
           </div>
-          <footer className="flex items-center justify-center">
+          <footer className="flex items-center justify-center hidden">
             <motion.div
               transition={{ type: "spring", duration: 3, bounce: 0.5 }}
               animate={inView || showHomeInfo ? "visible" : "hidden"}
@@ -216,12 +250,8 @@ export default function BeMore(props: IBeMoreProps) {
           </footer>
         </motion.div>
       </div>
-      <motion.div
+      {/* <motion.div
         className="h-screen block"
-        // animate={
-        //   { y: showHomeInfo }
-        // }
-        // style={{zIndex:-1}}
       >
         <HomeInfo
           id={1}
@@ -229,7 +259,7 @@ export default function BeMore(props: IBeMoreProps) {
           showHomeinfoM={showHomeinfoM}
           showHomeInfo={showHomeInfo}
         />
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
