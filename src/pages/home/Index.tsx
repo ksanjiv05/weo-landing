@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
-import logocoll from "../../../public/logocoll.png";
+import logocoll from "../../../public/loggif.gif";
+//   logocoll.png";
 import info from "../../../public/info.png";
 import darrow from "../../../public/darrow.png";
 
@@ -56,7 +57,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
     right: false,
   });
   const [moveLogo, setMoveLogo] = React.useState("hidden");
-  const [thrashold, setThreshold] = React.useState(0);
+  const [triggerOnce, setTriggerOnce] = React.useState(false);
 
   React.useEffect(() => {
     setIsOpen(true)
@@ -97,9 +98,16 @@ export default function HomeIndex(props: IHomeIndexProps) {
   };
 
   function handleShowScreen(key: string) {
-    console.log(key, set, set.size);
-    set.add(key);
-
+    console.log(key, set,triggerOnce,set.size >= 4&&key=="home"&&!triggerOnce);
+    // set.add(key);
+    key != "home" && set.add(key);
+    if(set.size >= 4&&!triggerOnce) {
+      // alert("go to be")
+      setTimeout(() =>{
+        router.push("#bemore");
+        setTriggerOnce(true)
+      },4000)
+    }
     switch (key) {
       case "left":
         setShowScreen({
@@ -342,6 +350,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
           <div
             className="h-48 w-48 absolute flex items-center  justify-center"
             style={{ zIndex: active ? -99 : 1 }}
+            // onMouseOver={() => handleShowScreen("home")}
           >
             {active && (
               <>
@@ -372,10 +381,11 @@ export default function HomeIndex(props: IHomeIndexProps) {
               </>
             )}
 
-            <div className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"></div>
+            <div  className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"></div>
             <motion.div
               className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
               style={{ backgroundColor: "#525252" }}
+              // onMouseOver={() => handleShowScreen("home")}
               // transition={{ duration: 2, ease: "easeOut" }}
               // animate={!inView ? "visible" : "hidden"}
               // variants={{
@@ -385,10 +395,10 @@ export default function HomeIndex(props: IHomeIndexProps) {
               // initial="visible"
             >
               {active && (
-                <Image src={logocoll} className="h-28 w-28" alt="logo" />
+                <Image src={logocoll} className="h-36 w-36 rounded-full" alt="logo" />
               )}
             </motion.div>
-            <motion.div
+            {!active&&<motion.div
               onClick={() => { setActive(true); setIsOpen(false) }}
               title="click to activate"
               className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
@@ -413,7 +423,7 @@ export default function HomeIndex(props: IHomeIndexProps) {
                 className="h-10 w-10 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
                 style={{ backgroundColor: "#525252" }}
               ></div>
-            </motion.div>
+            </motion.div>}
 
           </div>
         </Draggable>

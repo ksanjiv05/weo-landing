@@ -159,20 +159,17 @@ export const KeepMoreTextElements = ({ inView = false }) => {
   );
 };
 
+import logoGif from "../../public/PinkTDot1.gif"
+import Image from "next/image";
 export const KeepMoreOLogo = (props: any) => {
   return (
     <div className="h-48 w-48 absolute bg-white rounded-full shadow-[inset_0_0px_16px_rgba(0,0,0,0.45)] flex items-center justify-center">
-      <motion.div
+      {/* <motion.div
         className="h-36 w-36 absolute rounded-full border-2 flex items-center justify-center"
         style={{ backgroundColor: COLORS.RIGHT_COLOR }}
       >
         <div className="h-4 w-4 absolute rounded-full left-2 bg-white"></div>
-        {/* <div className="h-12 w-12 absolute bg-white rounded-full flex items-center justify-center left-8">
-          <div
-            className="h-8 w-8 absolute rounded-full border-2 flex items-center justify-center"
-            style={{ backgroundColor: COLORS.RIGHT_COLOR }}
-          ></div>
-        </div> */}
+        
         <motion.div
           title="click to activate"
           className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)] activeBtn"
@@ -184,7 +181,9 @@ export const KeepMoreOLogo = (props: any) => {
             style={{ backgroundColor: COLORS.RIGHT_COLOR }}
           ></div>
         </motion.div>
-      </motion.div>
+      </motion.div> */}
+        <Image src={logoGif} className="h-36 w-36 rounded-full" alt="logo" />
+
     </div>
   );
 };

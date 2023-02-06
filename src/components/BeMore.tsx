@@ -1,15 +1,15 @@
 import Image from "next/image";
 import * as React from "react";
-import logocoll from "../../public/logocoll.png";
+import logocoll from "../../public/disccordgif2.gif";
 import qo from "../../public/qo.png";
 // import Signal from "../../public/Signal.png";
 import { motion, useScroll } from "framer-motion";
 
 import { Direction } from "../components/Logo";
-import HomeInfo from "./HomeInfo";
 import LogoSlice from "./LogoSlice";
 import { COLORS } from "../utils/constants";
 import Discord from "../../public/Discord.png";
+import Head from "next/head";
 
 export interface IBeMoreProps {}
 
@@ -68,18 +68,36 @@ export default function BeMore(props: IBeMoreProps) {
   // }, []);
   const [inView, setInView] = React.useState(false);
 
-
-  React.useEffect(() => {
-    let timerId = setInterval(() => {
-      setShowIcon(p=>!p);
-      console.log("discord active",showIcon);
-    }, 8000);
-    return () => clearInterval(timerId);
-  }, []);
+  //auto switch
+  // React.useEffect(() => {
+  //   let timerId = setInterval(() => {
+  //     setShowIcon(p=>!p);
+  //     console.log("discord active",showIcon);
+  //   }, 8000);
+  //   return () => clearInterval(timerId);
+  // }, []);
 
   return (
     <section>
-      <div className="h-screen sticky bottom-0 top-0">
+      <Head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `(function(d, t) {
+                      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                      v.onload = function() {
+                        window.voiceflow.chat.load({
+                          verify: { projectID: '63dfa8233ae11300077d16e7' },
+                          url: 'https://general-runtime.voiceflow.com',
+                          versionID: 'production'
+                        });
+                      }
+                      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+                  })(document, 'script')`,
+          }}
+        />
+      </Head>
+      <div className="h-screen sticky bottom-0 top-0" id="bemore">
         <motion.div
           transition={{ duration: 2, ease: "easeOut" }}
           animate={!showIcon ? "visible" : "hidden"}
@@ -151,42 +169,52 @@ export default function BeMore(props: IBeMoreProps) {
                 style={{ backgroundColor: "#525252", zIndex: 999 }}
               >
                 {!showHomeInfo && (
-                  <Image src={logocoll} className="h-28 w-28" alt="logo" />
+                  <Image
+                    src={logocoll}
+                    className="h-36 w-36 rounded-full"
+                    alt="logo"
+                  />
                 )}
-                <motion.div                  transition={{ duration: 2, ease: "easeOut" }} animate={showIcon?"hidden":"visable"} variants={{visable:{opacity:1 },hidden:{ opacity:0}}}  className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]">
+                {/* <motion.div
+                  transition={{ duration: 2, ease: "easeOut" }}
+                  animate={showIcon ? "hidden" : "visable"}
+                  variants={{ visable: { opacity: 1 }, hidden: { opacity: 0 } }}
+                  className="h-16 w-16 absolute bg-white rounded-full flex items-center justify-center shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
+                >
                   <div
                     className="h-8 w-8 absolute rounded-full shadow-[inset_0_0px_10px_rgba(0,0,0,0.25)]"
                     style={{ backgroundColor: "#525252" }}
-                  >
-                  </div>
+                  ></div>
                 </motion.div>
 
                 <motion.div
-                transition={{ duration: 2, ease: "easeOut" }} animate={!showIcon?"hidden":"visable"} variants={{visable:{opacity:1 },hidden:{ opacity:0}}}  
- 
-                className="h-36 w-36 absolute flex items-center justify-center flex-col">
-                    <Image src={Discord} className="h-10 w-10 " alt="logo" />
-                    <p
-                      className="text-xl flex "
-                      style={{
-                        color: "#fff",
-                        marginTop: -10,
-                        textAlign: "center",
-                      }}
-                    >
-                      Get
-                    </p>
-                    <p
-                      className="text-xl flex "
-                      style={{
-                        color: "#fff",
-                        marginTop: -10,
-                        textAlign: "center",
-                      }}
-                    >
-                      Invited
-                    </p>
-                  </motion.div>
+                  transition={{ duration: 2, ease: "easeOut" }}
+                  animate={!showIcon ? "hidden" : "visable"}
+                  variants={{ visable: { opacity: 1 }, hidden: { opacity: 0 } }}
+                  className="h-36 w-36 absolute flex items-center justify-center flex-col"
+                >
+                  <Image src={Discord} className="h-10 w-10 " alt="logo" />
+                  <p
+                    className="text-xl flex "
+                    style={{
+                      color: "#fff",
+                      marginTop: -10,
+                      textAlign: "center",
+                    }}
+                  >
+                    Get
+                  </p>
+                  <p
+                    className="text-xl flex "
+                    style={{
+                      color: "#fff",
+                      marginTop: -10,
+                      textAlign: "center",
+                    }}
+                  >
+                    Invited
+                  </p>
+                </motion.div> */}
               </div>
             </motion.div>
           </div>
@@ -216,11 +244,11 @@ export default function BeMore(props: IBeMoreProps) {
               transition={{ delay: 2, duration: 1, ease: "easeIn" }}
               animate={inView ? "visible" : "hidden"}
               variants={{
-                visible: { y: -20, x: 180,opacity:1 },
+                visible: { y: -20, x: 180, opacity: 1 },
                 hidden: {
                   y: -20,
                   x: 180,
-                  opacity:0
+                  opacity: 0,
                 },
               }}
               initial="hidden"
