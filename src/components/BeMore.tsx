@@ -84,16 +84,16 @@ export default function BeMore(props: IBeMoreProps) {
           type="text/javascript"
           dangerouslySetInnerHTML={{
             __html: `(function(d, t) {
-                      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-                      v.onload = function() {
-                        window.voiceflow.chat.load({
-                          verify: { projectID: '63dfa8233ae11300077d16e7' },
-                          url: 'https://general-runtime.voiceflow.com',
-                          versionID: 'production'
-                        });
-                      }
-                      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-                  })(document, 'script')`,
+              var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+              v.onload = function() {
+                window.voiceflow.chat.load({
+                  verify: { projectID: '63e2cdee3679680007e696e0' },
+                  url: 'https://general-runtime.voiceflow.com',
+                  versionID: 'production'
+                });
+              }
+              v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+          })(document, 'script')`,
           }}
         />
       </Head>
